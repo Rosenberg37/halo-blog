@@ -1,6 +1,6 @@
 
 
-### 效果 
+### 效果 @
 
 ![后台](001.png)
 ----
@@ -29,22 +29,22 @@
 第四步：启动服务，关闭
 
    启动命令    service nginx start / systemctl start nginx
-   
+
    停止命令    service nginx stop / systemctl start nginx
-   
+
    重启命令    service nginx restart /systemctl restart nginx
-   
+
 
 
 ** install gunicorn
 第一步：安装：
 
     pip install gunicorn==19.7.1
-    
+
 第二步：配置启动
 
     gunicorn [options] module_name:variable_name
-    
+
 启动类为：
  ```python
  #esayblog.py
