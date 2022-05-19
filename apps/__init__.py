@@ -1,15 +1,13 @@
 # coding:utf-8
 from flask import Flask
 from flask_admin import Admin
-from flask_login import LoginManager
-from flask_sqlalchemy import SQLAlchemy
+from flask_babelex import Babel
 
 import config
-
-db = SQLAlchemy()
-
-login_manager = LoginManager()
-login_manager.login_view = 'main.login'
+from apps.blog import blog
+from apps.extentions import db, login_manager
+from apps.model_view import UserModelView, BaseMView, ArticleVModel
+from apps.models import User, Tag, Article
 
 
 def create_app():
@@ -17,23 +15,18 @@ def create_app():
     app.config.from_object(config)
 
     # 注册蓝图
-    from apps.blog import blog
     app.register_blueprint(blog)
 
     # 注册db
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Blog@2022@114.55.252.134:3306/blog'
     db.init_app(app)
 
-    # 国际化
-    from flask_babelex import Babel
+    # 汉化
     babel = Babel(app)
 
     # 注册flask-admin
     admin = Admin(app, name="xiaoblog", template_mode='bootstrap3', base_template='admin/mybase.html')
-    from .models import User, Tag, Article
-    from apps.modelview import UModelview, BaseMView, ArticleVModel
 
-    admin.add_view(UModelview(User, db.session, name="用户管理"))
+    admin.add_view(UserModelView(User, db.session, name="用户管理"))
     admin.add_view(BaseMView(Tag, db.session, category='Models', name="标签管理"))
     admin.add_view(ArticleVModel(Article, db.session, category='Models', name="文章管理"))
 

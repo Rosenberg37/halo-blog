@@ -3,8 +3,8 @@ from datetime import datetime
 
 from flask_login import UserMixin
 
-from apps import login_manager
-from . import db
+from apps.extentions import db
+from apps.extentions import login_manager
 
 
 # 用户表
@@ -26,8 +26,8 @@ class User(UserMixin, db.Model):
     @staticmethod
     def verity_password(originPassword, password):
         from apps.util import common
-        newpassword = common.md5(originPassword)
-        return password == newpassword
+        new_password = common.md5(originPassword)
+        return password == new_password
 
     def __repr__(self):
         return '<User %r>' % self.username

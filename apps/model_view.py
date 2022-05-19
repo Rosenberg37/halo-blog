@@ -13,8 +13,22 @@ from wtforms.widgets import TextArea
 
 from apps.models import User, Tag
 from . import db
+from .util import common
 
 file_path = op.join(op.dirname(__file__), 'static')  # 文件上传路径
+
+
+class CKTextAreaWidget(TextArea):
+    def __call__(self, field, **kwargs):
+        if kwargs.get('class'):
+            kwargs['class'] += ' ckeditor'
+        else:
+            kwargs.setdefault('class', 'ckeditor')
+        return super(CKTextAreaWidget, self).__call__(field, **kwargs)
+
+
+class CKTextAreaField(TextAreaField):
+    widget = CKTextAreaWidget()
 
 
 # base ModelView
@@ -38,13 +52,13 @@ def del_image(mapper, connection, target):
 
         # Delete thumbnail
         try:
-            os.remove(op.join(file_path,
-                              form.thumbgen_filename(target.head_img)))
+            os.remove(op.join(file_path, form.thumbgen_filename(target.head_img)))
         except OSError:
             pass
 
 
-class UModelview(BaseMView):
+class UserModelView(BaseMView):
+    # 自定义显示的column名字
     column_labels = {
         'id': u'序号',
         'email': u'邮件',
@@ -52,16 +66,17 @@ class UModelview(BaseMView):
         'role': u'角色',
         'password_hash': u'密码',
         'head_img': u'头像',
-        'create_time': u'创建时间'
+        'create_time': u'创建时间',
     }
-    column_exclude_list = ['password_hash', ]
+
+    # 不显示某些字段
+    # column_exclude_list = ['password_hash', ]
 
     def _list_thumbnail(view, context, model, name):
         if not model.head_img:
             return ''
 
-        return markupsafe.Markup('<img src="%s">' % url_for('static',
-                                                            filename="uploadfile/" + form.thumbgen_filename(model.head_img)))
+        return markupsafe.Markup('<img src="%s">' % url_for('static', filename="uploadfile/" + form.thumbgen_filename(model.head_img)))
 
     column_formatters = {
         'head_img': _list_thumbnail
@@ -70,26 +85,16 @@ class UModelview(BaseMView):
     # Alternative way to contribute field is to override it completely.
     # In this case, Flask-Admin won't attempt to merge various parameters for the field.
     form_extra_fields = {
-        'head_img': form.ImageUploadField('Image',
-                                          base_path=file_path,
-                                          relative_path="uploadfile/",
-                                          thumbnail_size=(100, 100, True))
+        'head_img': form.ImageUploadField(
+            'Image',
+            base_path=file_path,
+            relative_path="uploadfile/",
+            thumbnail_size=(100, 100, True)
+        )
     }
 
-    # TODO(_on_model_change)
-
-
-class CKTextAreaWidget(TextArea):
-    def __call__(self, field, **kwargs):
-        if kwargs.get('class'):
-            kwargs['class'] += ' ckeditor'
-        else:
-            kwargs.setdefault('class', 'ckeditor')
-        return super(CKTextAreaWidget, self).__call__(field, **kwargs)
-
-
-class CKTextAreaField(TextAreaField):
-    widget = CKTextAreaWidget()
+    def on_model_change(self, form, model, is_created):
+        model.password_hash = common.md5(form.password_hash.data)
 
 
 # 文章的自定义视图
@@ -100,7 +105,7 @@ class ArticleVModel(BaseMView):
         'content': CKTextAreaField
     }
 
-    def _on_model_change(self, form, model, is_created):
+    def on_model_change(self, form, model, is_created):
         print(str(model.__dict__))
         if is_created:
             tag_list = []
