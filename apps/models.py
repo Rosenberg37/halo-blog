@@ -31,9 +31,9 @@ class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(32))
     content = db.Column(db.Text, nullable=False)
-    tag = db.Column(db.String(64), nullable=True)
     create_time = db.Column(db.DateTime, nullable=True, default=datetime.now)
 
+    tags = db.relationship('Tag', secondary='article_tag')
     comments = db.relationship('Comment', back_populates='article', cascade='all, delete-orphan')
 
     def __repr__(self):
@@ -60,8 +60,14 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), nullable=False)
     desc = db.Column(db.String(64), nullable=True)
-    count = db.Column(db.Integer, nullable=False, default=1)
     create_time = db.Column(db.DateTime, nullable=True, default=datetime.now)
+    articles = db.relationship('Article', secondary='article_tag')
 
     def __repr__(self):
         return '<User %r>' % self.name
+
+
+class ArticleTag(db.Model):
+    db.__tablename__ = 'article_tag'
+    article_id = db.Column(db.Integer, db.ForeignKey(Article.id), primary_key=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey(Tag.id), primary_key=True)

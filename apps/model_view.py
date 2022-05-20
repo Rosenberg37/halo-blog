@@ -100,7 +100,6 @@ class UserModelView(BaseMView):
 # 文章的自定义视图
 class ArticleVModel(BaseMView):
     extra_js = ['//cdn.ckeditor.com/4.6.0/standard/ckeditor.js']
-    can_view_details = True
 
     form_overrides = {
         'content': CKTextAreaField
@@ -108,19 +107,21 @@ class ArticleVModel(BaseMView):
     column_exclude_list = ['content']
     def on_model_change(self, form, model, is_created):
         print(str(model.__dict__))
-        if is_created:
-            tag_list = []
-            if model.tag is not None:
-                tag_names = model.tag.split(",")
-                for tag in tag_names:
-                    search_tag = Tag.query.filter_by(name=tag).first()
-                    if search_tag is None:
-                        tag_object = Tag(name=tag, desc=tag, count=1, create_time=datetime.datetime.utcnow())
-                        tag_list.append(tag_object)
-                    else:
-                        search_tag.count += 1
-            db.session.add_all(tag_list)
 
+        # if is_created:
+        #     tag_list = []
+        #     if model.tag is not None:
+        #         tag_names = model.tag.split()
+        #         for tag in tag_names:
+        #             search_tag = Tag.query.filter_by(name=tag).first()
+        #             if search_tag is None:
+        #                 tag_object = Tag(name=tag, desc=tag, count=1, create_time=datetime.datetime.utcnow())
+        #                 tag_list.append(tag_object)
+        #             else:
+        #                 search_tag.count += 1
+        #         print("taglist", tag_list)
+        #         db.session.add_all(tag_list)
+        #         db.session.commit()
 
 class CommentView(BaseMView):
     column_labels = {

@@ -2,7 +2,7 @@ from utils import random_key
 
 HOST = '114.55.252.134'
 PORT = '3306'
-DATABASE = 'blog'
+DATABASE = 'blog1'
 USERNAME = 'root'
 PASSWORD = 'Blog@2022'
 SECRET_KEY = random_key()
