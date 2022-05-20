@@ -33,6 +33,6 @@ def create_app():
     # 整合flask-login
     login_manager.init_app(app)
 
-    app.config["SECRET_KEY"] = '79537d00f4834892986f09a100aa1edf'
+
 
     return app
