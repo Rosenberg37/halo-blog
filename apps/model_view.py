@@ -112,10 +112,10 @@ class ArticleVModel(BaseMView):
             if model.tag is not None:
                 tag_names = model.tag.split(",")
                 for tag in tag_names:
-                    searchTag = Tag.query.filter_by(name=tag).first()
-                    if searchTag is None:
-                        tagobj = Tag(name=tag, desc=tag, count=1, create_time=datetime.datetime.utcnow())
+                    search_tag = Tag.query.filter_by(name=tag).first()
+                    if search_tag is None:
+                        tag_object = Tag(name=tag, desc=tag, count=1, create_time=datetime.datetime.utcnow())
+                        tag_list.append(tag_object)
                     else:
-                        searchTag.count = +1
-                    # taglist.append(tagobj)
+                        search_tag.count += 1
             db.session.add_all(tag_list)

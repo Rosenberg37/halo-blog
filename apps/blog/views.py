@@ -1,9 +1,10 @@
-from flask import url_for, redirect, request, flash, render_template
+from flask import url_for, redirect, request, flash, render_template, Blueprint
 from flask_login import login_user, logout_user
 
 from apps.models import User, Article
-from . import blog
 from .forms import LoginForm
+
+blog = Blueprint('main', __name__)
 
 
 @blog.route("/index.html")
