@@ -1,5 +1,6 @@
 {% extends 'baseindex.html' %}
 {% from 'bootstrap/form.html' import render_form %}
+{% from 'bootstrap/pagination.html' import render_pagination %}
 
 {% block pageHeader %}
     <header class="intro-header"
@@ -26,11 +27,6 @@
     </div>
 
     <div class="comments" id="comments">
-        <h3 style="color:red;">{{ comments|length }} Comments
-            <small>
-                <a href="{ { url_for ('.show_post', post＿id=post.id, page=pagination.pages or 1) } }#comments"></a>
-            </small>
-        </h3>
         {% if comments %}
             <ul class="list-group">
                 {% for comment in comments %}
@@ -51,10 +47,6 @@
                                 {% if comment.replied %}<span class="badge badge-light">Reply</span>
                                 {% endif %}
                             </h5>
-                            <small data-toggle="tooltip" data-placement="top" data-delag="500"
-                                   data-timestamp="{{ comment.timestamp.strftime('%Y-%m-%dT%H:%M:%SZ') }}">
-                                {{ moment(comment.timestamp).fromNow }}
-                            </small>
                         </div>
                         {% if comment.replied %}
                             <p class="alert alert-dark reply-body">
@@ -65,10 +57,6 @@
                         <p class="mb-1">
                             {{ comment.body }}
                         </p>
-                        <div class="float-right">
-                            <a class="btn btn-light btn-sm"
-                               href="{{ url_for('.reply_comment',comment_id=comment.id) }}">Reply</a>
-                        </div>
                     </li>
                 {% endfor %}
             </ul>

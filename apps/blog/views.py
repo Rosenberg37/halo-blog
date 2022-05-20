@@ -58,6 +58,9 @@ def aboutme():
 def article(article_id):
     article = Article.query.get_or_404(article_id)
 
+    pagination = Comment.query.with_parent(article).order_by(Comment.timestamp).paginate(1, 15)
+    comments = pagination.items
+
     if current_user.is_authenticated:
         form = AdminCommentForm()
         form.author.data = current_user.username
@@ -76,4 +79,4 @@ def article(article_id):
         db.session.commit()
         return redirect(url_for('main.article', article_id=article_id))
 
-    return render_template('article.html', article=article, form=form)
+    return render_template('article.html', article=article, form=form, comments=comments, pagination=pagination)

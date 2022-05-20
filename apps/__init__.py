@@ -39,5 +39,4 @@ def create_app():
     # 整合flask-login
     login_manager.init_app(app)
 
-
     return app

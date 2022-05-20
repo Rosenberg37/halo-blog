@@ -121,7 +121,6 @@ class ArticleVModel(BaseMView):
             db.session.add_all(tag_list)
 
 
-
 class CommentView(BaseMView):
     column_labels = {
         'id': u'评论ID',
