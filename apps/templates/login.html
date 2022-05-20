@@ -26,7 +26,7 @@
 });
 </script>
 <!--SIGN UP-->
-<h1>cleanblog 后台管理系统 </h1>
+<h1>后台管理登录 </h1>
 <div class="login-form">
     <div class="close"></div>
     <div class="head-info">
@@ -42,16 +42,11 @@
         {{ form.hidden_tag() }}
         {{ form.username(id="username",class="text",placeholder="E-mail or username",required=True) }}
         {{ form.password(id="passwd",class="form-control",placeholder="input passwd",required=True) }}
-
-        {#					<input type="text" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" >#}
-        {#						<div class="key">#}
-        {#					<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">#}
-        {#						</div>#}
         <div class="leos">
             {{ form.remember_me.label }} {{ form.remember_me() }}
 
         </div>
-        <div class="key" ,style="color:red">
+        <div class="key" style="color:red">
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     <ul class="flashes">
