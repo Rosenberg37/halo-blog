@@ -64,7 +64,7 @@ class UserModelView(BaseMView):
         'email': u'邮件',
         'username': u'用户名',
         'role': u'角色',
-        'password_hash': u'密码',
+        'password_hash': u'密码hash码',
         'head_img': u'头像',
         'create_time': u'创建时间',
     }
