@@ -64,7 +64,7 @@ class UserModelView(BaseMView):
         'email': u'邮件',
         'username': u'用户名',
         'role': u'角色',
-        'password_hash': u'密码hash码',
+        'password_hash': u'密码',
         'head_img': u'头像',
         'create_time': u'创建时间',
     }
@@ -121,6 +121,7 @@ class ArticleVModel(BaseMView):
             db.session.add_all(tag_list)
 
 
+
 class CommentView(BaseMView):
     column_labels = {
         'id': u'评论ID',
@@ -130,4 +131,7 @@ class CommentView(BaseMView):
         'timestamp': u'时间',
     }
 
-    column_exclude_list = ['site', 'article', 'replies']
+    can_view_details = True
+    can_edit = False
+    column_exclude_list = ['site', 'replied']
+    column_filters = ['article_id']
