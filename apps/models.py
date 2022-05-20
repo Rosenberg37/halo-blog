@@ -64,7 +64,7 @@ class Tag(db.Model):
     articles = db.relationship('Article', secondary='article_tag')
 
     def __repr__(self):
-        return '<User %r>' % self.name
+        return '%s' % self.name
 
 
 class ArticleTag(db.Model):
