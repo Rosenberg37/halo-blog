@@ -129,9 +129,11 @@ class CommentView(BaseMView):
         'email': u'邮件',
         'body': u'内容',
         'timestamp': u'时间',
+        'article_id': u'文章标题'
     }
 
     can_view_details = True
     can_edit = False
+    can_create = False
     column_exclude_list = ['site', 'replied']
-    column_filters = ['article_id']
+    column_filters = ['article_id', 'author', 'email']
