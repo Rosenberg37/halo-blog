@@ -19,12 +19,13 @@ def create_app():
 
     # 注册db
     db.init_app(app)
+    db.create_all(app=app)
 
     # 汉化
     babel = Babel(app)
 
     # 注册flask-admin
-    admin = Admin(app, name="xiaoblog", template_mode='bootstrap3', base_template='admin/mybase.html')
+    admin = Admin(app, name="HaloBlog", template_mode='bootstrap3', base_template='admin/mybase.html')
 
     admin.add_view(UserModelView(User, db.session, name="用户管理"))
     admin.add_view(BaseMView(Tag, db.session, category='Models', name="标签管理"))
@@ -32,7 +33,5 @@ def create_app():
 
     # 整合flask-login
     login_manager.init_app(app)
-
-
 
     return app

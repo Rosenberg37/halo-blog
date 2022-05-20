@@ -70,7 +70,7 @@ class UserModelView(BaseMView):
     }
 
     # 不显示某些字段
-    # column_exclude_list = ['password_hash', ]
+    column_exclude_list = ['password_hash']
 
     def _list_thumbnail(view, context, model, name):
         if not model.head_img:
