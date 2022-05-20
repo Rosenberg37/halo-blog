@@ -75,8 +75,20 @@ def article(article_id):
         site = form.site.data
         body = form.body.data
         comment = Comment(author=author, email=email, site=site, body=body, article=article)
+
+        replied_id = request.args.get('reply')
+        if replied_id:
+            replied_comment = Comment.query.get_or_404(replied_id)
+            comment.replied = replied_comment
+
         db.session.add(comment)
         db.session.commit()
         return redirect(url_for('main.article', article_id=article_id))
 
     return render_template('article.html', article=article, form=form, comments=comments, pagination=pagination)
+
+
+@blog.route('/reply/comment/<int:comment_id>')
+def reply_comment(comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+    return redirect(url_for('main.article', article_id=comment.article_id, reply=comment_id, author=comment.author) + '#comment-form')

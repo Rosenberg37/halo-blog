@@ -57,6 +57,8 @@
                         <p class="mb-1">
                             {{ comment.body }}
                         </p>
+                        <a class="btn btn-light btn-sm"
+                           href="{{ url_for('.reply_comment', comment_id=comment.id) }}">Reply</a>
                     </li>
                 {% endfor %}
             </ul>
@@ -64,6 +66,12 @@
             <div class="tip"><h5 style="color:red;">No comments.</h5></div>
         {% endif %}
     </div>
+    {% if request.args.get('reply') %}
+        <div class="alert alert-dark">
+            Reply to <strong>{{ request.args.get('author') }}</strong>:
+            <a class="float-right" href="{{ url_for('.article', article_id=article.id) }}">Cancel</a>
+        </div>
+    {% endif %}
     {% if comments %}
         {{ render_pagination(pagination, fragment='#comments') }}
     {% endif %}
