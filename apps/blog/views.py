@@ -9,7 +9,7 @@ from apps.models import User, Article, Comment
 blog = Blueprint('main', __name__)
 
 
-@blog.route("/index.html")
+@blog.route("/index")
 def index():
     page = request.args.get("page")
     if page is None:
@@ -27,7 +27,7 @@ def index2():
     return redirect(url_for("main.index"))
 
 
-@blog.route("/login.html", methods=['POST', 'GET'])
+@blog.route("/login", methods=['POST', 'GET'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -42,15 +42,15 @@ def login():
     return render_template("login.html", form=form)
 
 
-@blog.route("/loginout.html")
-def loginout():
+@blog.route("/login_out")
+def login_out():
     logout_user()
     flash("退出成功！")
     return redirect(url_for("main.login"))
 
 
-@blog.route("/aboutme.html")
-def aboutme():
+@blog.route("/about")
+def about():
     return render_template("about.html")
 
 

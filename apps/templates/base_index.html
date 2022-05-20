@@ -14,7 +14,8 @@
     <link href="{{ url_for('static',filename='theme/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Additional fonts for this theme -->
-    <link href="{{ url_for('static',filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static',filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet"
+          type="text/css">
 
     <!-- Custom styles for this theme -->
     <link href="{{ url_for('static',filename='theme/css/clean-blog.min.css') }}" rel="stylesheet">
@@ -25,52 +26,52 @@
 
     <!-- Temporary navbar container fix until Bootstrap 4 is patched -->
     <style>
-    .navbar-toggler {
-        z-index: 1;
-    }
-    
-    @media (max-width: 576px) {
-        nav > .container {
-            width: 100%;
+        .navbar-toggler {
+            z-index: 1;
         }
-    }
+
+        @media (max-width: 576px) {
+            nav > .container {
+                width: 100%;
+            }
+        }
     </style>
 
 </head>
 
 <body>
 
-    <!-- Navigation -->
-    {% block navigation %}
+<!-- Navigation -->
+{% block navigation %}
     <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav">
         <div class="container">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
                 Menu <i class="fa fa-bars"></i>
             </button>
             <a class="navbar-brand page-scroll" href="index.html">AI自由体-博客</a>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="/index.html">首页</a>
+                        <a class="nav-link page-scroll" href='{{ url_for('main.index') }}'>首页</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="/aboutme.html">关于我</a>
+                        <a class="nav-link page-scroll" href="#">标签</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="/tags.html">标签</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="/contact.html">联系我</a>
+                        <a class="nav-link page-scroll" href='{{ url_for('main.about') }}'>关于我</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    {% endblock %}
+{% endblock %}
 
-    <!-- Page Header -->
-    {% block pageHeader %}
-    <header class="intro-header" style="background-image: url('{{ url_for('static',filename='theme/img/home-bg.jpg') }}')">
+<!-- Page Header -->
+{% block pageHeader %}
+    <header class="intro-header"
+            style="background-image: url('{{ url_for('static',filename='theme/img/home-bg.jpg') }}')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
@@ -82,10 +83,10 @@
             </div>
         </div>
     </header>
-   {% endblock %}
-    <!-- Main Content -->
-    <div class="container">
-        {% block body %}
+{% endblock %}
+<!-- Main Content -->
+<div class="container">
+    {% block body %}
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <div class="post-preview">
@@ -103,7 +104,8 @@
                 <div class="post-preview">
                     <a href="post.html">
                         <h2 class="post-title">
-                            I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
+                            I believe every human has a finite number of heartbeats. I don't intend to waste any of
+                            mine.
                         </h2>
                     </a>
                     <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 18, 2017</p>
@@ -121,14 +123,15 @@
                     <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on August 24, 2017</p>
                 </div>
                 <hr>
-                <div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
+                <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" title="网站模板">网站模板</a></div>
                 <div class="post-preview">
                     <a href="post.html">
                         <h2 class="post-title">
                             Failure is not an option
                         </h2>
                         <h3 class="post-subtitle">
-                            Many say exploration is part of our destiny, but it’s actually our duty to future generations.
+                            Many say exploration is part of our destiny, but it’s actually our duty to future
+                            generations.
                         </h3>
                     </a>
                     <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on July 8, 2017</p>
@@ -140,15 +143,15 @@
                 </div>
             </div>
         </div>
-        {% endblock %}
-    </div>
+    {% endblock %}
+</div>
 
-    <hr>
+<hr>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            {% block footer %}
+<!-- Footer -->
+<footer>
+    <div class="container">
+        {% block footer %}
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <ul class="list-inline text-center">
@@ -177,28 +180,30 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2017. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2017. More Templates <a
+                            href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a
+                            href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
                 </div>
             </div>
-            {% endblock %}
-        </div>
-    </footer>
+        {% endblock %}
+    </div>
+</footer>
 
-    <!-- jQuery Version 3.1.1 -->
-    <script src="{{ url_for('static',filename='vendor/jquery/jquery.js') }}"></script>
+<!-- jQuery Version 3.1.1 -->
+<script src="{{ url_for('static',filename='vendor/jquery/jquery.js') }}"></script>
 
-    <!-- Tether -->
-    <script src="{{ url_for('static',filename='theme/tether/tether.min.js') }}"></script>
+<!-- Tether -->
+<script src="{{ url_for('static',filename='theme/tether/tether.min.js') }}"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ url_for('static',filename='theme/bootstrap/js/bootstrap.min.js') }}"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="{{ url_for('static',filename='theme/bootstrap/js/bootstrap.min.js') }}"></script>
 
-    <!-- Theme JavaScript -->
-    <script src="{{ url_for('static',filename='theme/js/clean-blog.min.js') }}"></script>
+<!-- Theme JavaScript -->
+<script src="{{ url_for('static',filename='theme/js/clean-blog.min.js') }}"></script>
 
-    {% block ext_js %}
+{% block ext_js %}
 
-    {% endblock %}
+{% endblock %}
 
 </body>
 

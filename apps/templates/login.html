@@ -38,7 +38,7 @@
     <div class="avtar">
         <img src="{{ url_for('static',filename='login/images/avtar.png') }}"/>
     </div>
-    <form action="/login.html" method="post">
+    <form action="{{ url_for('main.login') }}" method="post">
         {{ form.hidden_tag() }}
         {{ form.username(id="username",class="text",placeholder="E-mail or username",required=True) }}
         {{ form.password(id="passwd",class="form-control",placeholder="input passwd",required=True) }}

@@ -1,4 +1,4 @@
-{% extends 'baseindex.html' %}
+{% extends 'base_index.html' %}
 
 {% block body %}
     <div class="row">
@@ -30,7 +30,7 @@
     <script>
         function next_page() {
             const page = parseInt($("#page").val());
-            window.location.href = '/index.html?page=' + (page + 1);
+            window.location.href = '{{ url_for('main.index')}}' + '?page=' + (page + 1);
         }
     </script>
 {% endblock %}
