@@ -28,7 +28,7 @@
         {% else -%}
         <li>
         {%- endif %}
-                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> {{ item.name }}<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> {{ item.name }}<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
           {%- for child in children -%}
             {% set class_name = child.get_class_name() %}

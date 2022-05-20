@@ -21,7 +21,7 @@ def index():
 
 @blog.route("/")
 def index2():
-    return redirect(url_for("main.index"))
+    return redirect(url_for("main.login"))
 
 
 @blog.route("/login.html", methods=['POST', 'GET'])
