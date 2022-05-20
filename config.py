@@ -1,4 +1,4 @@
-from apps.util.common import random_key
+from utils import random_key
 
 HOST = '114.55.252.134'
 PORT = '3306'

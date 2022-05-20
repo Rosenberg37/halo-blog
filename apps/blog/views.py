@@ -1,6 +1,7 @@
 from flask import url_for, redirect, request, flash, render_template, Blueprint
 from flask_login import login_user, logout_user
 
+import utils
 from apps.models import User, Article
 from .forms import LoginForm
 
@@ -13,6 +14,7 @@ def index():
     if page is None:
         page = 1
     page = int(page)
+    # noinspection PyUnresolvedReferences
     paginate = Article.query.order_by(Article.create_time.desc()).paginate(page, 3, error_out=False)
     articles = paginate.items
 
@@ -30,7 +32,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None:
-            flag = User.verity_password(form.password.data, user.password_hash)
+            flag = utils.verity_password(form.password.data, user.password_hash)
             if flag:
                 login_user(user, form.remember_me.data)
                 return redirect(request.args.get('next') or url_for("admin.index"))

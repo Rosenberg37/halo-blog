@@ -5,7 +5,6 @@ from flask_login import UserMixin
 
 from apps.extentions import db
 from apps.extentions import login_manager
-from apps.util import common
 
 
 # 用户表
@@ -23,11 +22,6 @@ class User(UserMixin, db.Model):
     def load_user(userid):
         user = User.query.filter_by(id=userid).first()
         return user
-
-    @staticmethod
-    def verity_password(origin_password, password):
-        new_password = common.md5(origin_password)
-        return password == new_password
 
     def __repr__(self):
         return '<User %r>' % self.username

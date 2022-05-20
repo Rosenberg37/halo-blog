@@ -13,7 +13,6 @@ from wtforms.widgets import TextArea
 
 from apps.models import User, Tag
 from . import db
-from .util import common
 
 file_path = op.join(op.dirname(__file__), 'static')  # 文件上传路径
 
