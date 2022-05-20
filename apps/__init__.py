@@ -34,7 +34,7 @@ def create_app():
     admin.add_view(UserModelView(User, db.session, name="用户管理"))
     admin.add_view(BaseMView(Tag, db.session, category='Models', name="标签管理"))
     admin.add_view(ArticleVModel(Article, db.session, category='Models', name="文章管理"))
-    admin.add_view(CommentView(Comment, db.session))
+    admin.add_view(CommentView(Comment, db.session, category='Models', name="评论管理"))
 
     # 整合flask-login
     login_manager.init_app(app)
