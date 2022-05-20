@@ -11,6 +11,7 @@ from sqlalchemy.event import listens_for
 from wtforms import TextAreaField
 from wtforms.widgets import TextArea
 
+import utils
 from apps.models import User, Tag
 from . import db
 
@@ -93,7 +94,7 @@ class UserModelView(BaseMView):
     }
 
     def on_model_change(self, form, model, is_created):
-        model.password_hash = common.md5(form.password_hash.data)
+        model.password_hash = utils.md5(form.password_hash.data)
 
 
 # 文章的自定义视图
