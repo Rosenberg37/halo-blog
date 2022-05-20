@@ -2,6 +2,7 @@
 from flask import Flask
 from flask_admin import Admin
 from flask_babelex import Babel
+from flask_bootstrap import Bootstrap
 
 import config
 from apps.blog import blog
@@ -23,6 +24,9 @@ def create_app():
 
     # 汉化
     babel = Babel(app)
+
+    # Bootstrap
+    bootstrap = Bootstrap(app)
 
     # 注册flask-admin
     admin = Admin(app, name="HaloBlog", template_mode='bootstrap3', base_template='admin/mybase.html')

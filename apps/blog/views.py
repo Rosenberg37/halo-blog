@@ -1,9 +1,9 @@
 from flask import url_for, redirect, request, flash, render_template, Blueprint
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 
 import utils
 from apps.models import User, Article
-from .forms import LoginForm
+from .forms import LoginForm, CommentForm, AdminCommentForm
 
 blog = Blueprint('main', __name__)
 
@@ -56,4 +56,13 @@ def aboutme():
 @blog.route("/article/<int:id>")
 def details(id):
     article = Article.query.filter_by(id=id).first()
-    return render_template('article.html', article=article)
+
+    if current_user.is_authenticated:
+        form = AdminCommentForm()
+        form.author.data = current_user.username
+        form.email.data = current_user.email
+        form.site.data = url_for('.index')
+    else:
+        form = CommentForm()
+
+    return render_template('article.html', article=article, form=form)

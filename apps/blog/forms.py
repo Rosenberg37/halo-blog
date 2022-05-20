@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import fields, validators
+from wtforms import fields, validators, HiddenField
 
 
 class LoginForm(FlaskForm):
@@ -16,3 +16,9 @@ class CommentForm(FlaskForm):
     site = fields.StringField('Site', validators=[validators.Optional(), validators.URL(), validators.Length(0, 255)])
     body = fields.TextAreaField('Comment', validators=[validators.DataRequired()])
     submit = fields.SubmitField()
+
+
+class AdminCommentForm(CommentForm):
+    author = HiddenField()
+    email = HiddenField()
+    site = HiddenField()
