@@ -119,3 +119,15 @@ class ArticleVModel(BaseMView):
                     else:
                         search_tag.count += 1
             db.session.add_all(tag_list)
+
+class CommentView(BaseMView):
+    column_labels = {
+        'id': u'评论ID',
+        'author': u'作者',
+        'email': u'邮件',
+        'body': u'内容',
+        'timestamp': u'时间',
+    }
+
+    column_exclude_list = ['site', 'article', 'replies']
+

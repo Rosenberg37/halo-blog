@@ -6,8 +6,8 @@ from flask_babelex import Babel
 import config
 from apps.blog import blog
 from apps.extentions import db, login_manager
-from apps.model_view import UserModelView, BaseMView, ArticleVModel
-from apps.models import User, Tag, Article
+from apps.model_view import UserModelView, BaseMView, ArticleVModel, CommentView
+from apps.models import User, Tag, Article, Comment
 
 
 def create_app():
@@ -30,8 +30,10 @@ def create_app():
     admin.add_view(UserModelView(User, db.session, name="用户管理"))
     admin.add_view(BaseMView(Tag, db.session, category='Models', name="标签管理"))
     admin.add_view(ArticleVModel(Article, db.session, category='Models', name="文章管理"))
+    admin.add_view(CommentView(Comment, db.session))
 
     # 整合flask-login
     login_manager.init_app(app)
+
 
     return app
