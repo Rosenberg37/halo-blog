@@ -100,11 +100,12 @@ class UserModelView(BaseMView):
 # 文章的自定义视图
 class ArticleVModel(BaseMView):
     extra_js = ['//cdn.ckeditor.com/4.6.0/standard/ckeditor.js']
+    can_view_details = True
 
     form_overrides = {
         'content': CKTextAreaField
     }
-
+    column_exclude_list = ['content']
     def on_model_change(self, form, model, is_created):
         print(str(model.__dict__))
         if is_created:
