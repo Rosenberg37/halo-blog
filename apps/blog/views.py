@@ -69,7 +69,9 @@ def tags_id(tag_id):
 
 @blog.route("/tags")
 def tags():
-    return redirect(url_for("main.tags_id", tag_id=1))
+    tags = Tag.query.order_by(sqlalchemy.desc(Tag.create_time))
+    cnts = [Article.query.with_parent(tag).count() for tag in tags]
+    return render_template("tags.html", tags=tags, cnts=cnts)
 
 
 @blog.route("/article/<int:article_id>", methods=['GET', 'POST'])
