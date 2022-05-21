@@ -1,4 +1,3 @@
-import datetime
 import os
 import os.path as op
 
@@ -12,8 +11,7 @@ from wtforms import TextAreaField
 from wtforms.widgets import TextArea
 
 import utils
-from apps.models import User, Tag
-from . import db
+from apps.models import User
 
 file_path = op.join(op.dirname(__file__), 'static')  # 文件上传路径
 
