@@ -62,7 +62,8 @@ def tags_id(tag_id):
     if page is None:
         page = 1
     page = int(page)
-    paginate = Article.query.with_parent(tag).order_by(sqlalchemy.desc(Article.create_time)).paginate(page, 3, error_out=False)
+    paginate = Article.query.with_parent(tag).order_by(sqlalchemy.desc(Article.create_time)).paginate(page, 3,
+                                                                                                      error_out=False)
     articles = paginate.items
     return render_template("tags.html", articles=articles, category=tag, paginate=paginate)
 
@@ -71,7 +72,8 @@ def tags_id(tag_id):
 def tags():
     tags = Tag.query.order_by(sqlalchemy.desc(Tag.create_time))
     cnts = [Article.query.with_parent(tag).count() for tag in tags]
-    return render_template("tags.html", tags=tags, cnts=cnts)
+    tags_list = zip(tags, cnts)
+    return render_template("tags_list.html", tags_list=tags_list, cnts=cnts)
 
 
 @blog.route("/article/<int:article_id>", methods=['GET', 'POST'])
@@ -111,5 +113,5 @@ def article(article_id):
 @blog.route('/reply/comment/<int:comment_id>')
 def reply_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
-    return redirect(url_for('main.article', article_id=comment.article_id, reply=comment_id, author=comment.author) + '#comment-form')
-
+    return redirect(url_for('main.article', article_id=comment.article_id, reply=comment_id,
+                            author=comment.author) + '#comment-form')
