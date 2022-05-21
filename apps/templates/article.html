@@ -36,7 +36,7 @@
 
     <div class="comments" id="comments">
         {% if comments %}
-            <ul class="list-group">
+            <ul class="list-group container" style="left:0%; width: 60%; right:0%;">
                 {% for comment in comments %}
                     <li class="list-group-item list-group-item-action flex-column">
                         <div class="d-flex w-100 justify-content-between">
@@ -66,8 +66,9 @@
                         <p class="mb-1" style="margin: 0px;padding: 0px;">
                             {{ comment.body }}
                         </p>
-                        <a class="btn btn-light btn-sm"
-                           href="{{ url_for('.reply_comment', comment_id=comment.id) }}">Reply</a>
+                        <a class="btn btn-outline-primary btn-sm"
+                           style="border-radius: 10px; padding-left: 15px;padding-right: 15px;padding-top: 8px;padding-bottom: 8px;"
+                           href="{{ url_for('.reply_comment', comment_id=comment.id) }}"><span>Reply</span></a>
                     </li>
                 {% endfor %}
             </ul>
@@ -81,11 +82,14 @@
             <a class="float-right" href="{{ url_for('.article', article_id=article.id) }}">Cancel</a>
         </div>
     {% endif %}
-    {% if comments %}
-        {{ render_pagination(pagination, fragment='#comments') }}
-    {% endif %}
+    <div class="container">
+        {% if comments %}
+            {{ render_pagination(pagination, fragment='#comments') }}
+        {% endif %}
+    </div>
 
-    <div id="comment-form">
+
+    <div id="comment-form" class="container">
         {{ render_form(form, action=request.full_path) }}
     </div>
 {% endblock %}

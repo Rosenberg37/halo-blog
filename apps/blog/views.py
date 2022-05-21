@@ -17,7 +17,7 @@ def index():
         page = 1
     page = int(page)
     # noinspection PyUnresolvedReferences
-    paginate = Article.query.order_by(Article.create_time.desc()).paginate(page, 3, error_out=False)
+    paginate = Article.query.order_by(Article.create_time.desc()).paginate(page, 10, error_out=False)
     articles = paginate.items
 
     return render_template("index.html", articles=articles, paginate=paginate)

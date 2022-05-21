@@ -2,20 +2,19 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 blog-post post-list">
             {% for article in articles %}
-                <div class="post-preview">
+                <div class="panel-small single-post box-shadow-wrap-normal" style="background-color:#eaeaea;border-radius: 20px;padding:10px;"> {# post-preview #}
                     <a href="/article/{{ article.id }}">
-                        <h2 class="post-title">
+                        <h2 class="post-title" style="color:#000000;font-size:25px;font-weight:normal;">
                             {{ article.title }}
                         </h2>
-                        <h3 class="post-subtitle">
+                        <h3 class="post-subtitle" style="color:#7e0404;font-size:20px;font-weight:normal;">
                             {{ article.content | safe | truncate(30) }}
                         </h3>
                     </a>
-                    <p class="post-meta">Posted by <a href="#">ouyangm</a> {{ article.create_time }}</p>
+                    <p class="post-meta" style="color:#414141;font-size:15px;padding-left:20px;padding-top:0px;margin:0px;font-weight:normal;">Posted by <a href="#">ouyangm</a> {{ article.create_time }}</p>
                 </div>
-                <hr>
             {% endfor %}
             <!-- Pager -->
             <div class="clearfix">

@@ -33,7 +33,6 @@
         <link href="{{ url_for('static',filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet"
               type="text/css">
 
-
         {% if admin_view.extra_css %}
             {% for css_url in admin_view.extra_css %}
                 <link href="{{ css_url }}" rel="stylesheet">
@@ -52,7 +51,6 @@
 </head>
 <body>
 <div id="wrapper">
-
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -111,13 +109,11 @@
             {% set render_ctx = h.resolve_ctx() %}
 
             {% block body %}{% endblock %}
-
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
-
 </div>
 
 

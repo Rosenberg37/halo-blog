@@ -21,7 +21,7 @@
 
 
 {% block body %}
-    <div id="tags" style="height:500px;width:500px;">
+    <div id="tags" style="border-color:black;border-style:solid;border-width:1px;height:500px;width:100%;">
     </div>
     <script>
         let echartsData = []
@@ -91,19 +91,10 @@
             myChart.setOption(option);
             // 点击某个字
             myChart.on('click', function (params) {
-                console.log('myChart----click---:', params, '------', params.data)
+                console.log(params.data);
                 window.location.href = params.data['href'];
             });
         }
-
-        {#let echartsData = [#}
-        {#    {#}
-        {#        name: "十九大精神",#}
-        {#        value: 15000,#}
-        {#        href:"https://baidu.com/"#}
-        {#    }#}
-        {#]#}
         initChart();
-        console.log(echartsData);
     </script>
 {% endblock %}
