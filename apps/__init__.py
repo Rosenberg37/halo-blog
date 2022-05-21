@@ -7,9 +7,9 @@ from flask_bootstrap import Bootstrap5
 import config
 from apps.blog import blog
 from apps.extentions import db, login_manager
-from apps.model_view import UserModelView, BaseMView, ArticleVModel, CommentView
+from apps.model_view import UserModelView, BaseMView, ArticleVModel, CommentView, FileAdminView
 from apps.models import User, Tag, Article, Comment
-
+import os.path as op
 
 def create_app():
     app = Flask(__name__)
@@ -36,7 +36,8 @@ def create_app():
     admin.add_view(BaseMView(Tag, db.session, category='Models', name="标签管理"))
     admin.add_view(ArticleVModel(Article, db.session, category='Models', name="文章管理"))
     admin.add_view(CommentView(Comment, db.session, category='Models', name='评论管理'))
-
+    path = op.join(op.dirname(__file__), 'static/uploadfile')
+    admin.add_view(FileAdminView(path, '/static/uploadfile', name='Static Files'))
     # 整合flask-login
     login_manager.init_app(app)
 

@@ -9,7 +9,7 @@ from flask_login.utils import current_user
 from sqlalchemy.event import listens_for
 from wtforms import TextAreaField
 from wtforms.widgets import TextArea
-
+from flask_admin.contrib.fileadmin import FileAdmin
 import utils
 from apps.models import User
 
@@ -104,13 +104,8 @@ class ArticleVModel(BaseMView):
     }
     column_exclude_list = ['content']
 
-    form_extra_fields = {
-        'File': form. FileUploadField(
-            'File',
-            base_path=file_path,
-            relative_path="upload_files/",
-        )
-    }
+    # def on_model_change(self, form, model, is_created):
+
 
 
 class CommentView(BaseMView):
@@ -128,3 +123,14 @@ class CommentView(BaseMView):
     can_create = False
     column_exclude_list = ['site', 'replied']
     column_filters = ['article_id', 'author', 'email']
+
+
+class FileAdminView(FileAdmin):
+    can_upload = True
+    can_delete = True
+    can_delete_dirs = False
+    can_mkdir = False
+    can_rename = True
+
+
+
