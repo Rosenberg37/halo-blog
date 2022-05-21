@@ -4,8 +4,8 @@
 
 {% block pageHeader %}
     <header class="intro-header"
-{#            style="background-image: url('{{ url_for('static',filename='theme/img/post-bg.jpg' ) }}')">#}
-        style="background-image: url('https://p2.itc.cn/images01/20220515/7f33f563ded5431799285239dbe569cc.jpeg')">
+            {#            style="background-image: url('{{ url_for('static',filename='theme/img/post-bg.jpg' ) }}')">#}
+            style="background-image: url('https://p2.itc.cn/images01/20220515/7f33f563ded5431799285239dbe569cc.jpeg')">
 
         <div class="container">
             <div class="row">
@@ -55,15 +55,16 @@
                                 {% if comment.from_admin %}
                                     <span class="badge badge-primary">Author</span>
                                 {% endif %}
-                                {% if comment.replied %}<span class="badge badge-light" style="color:red">Reply</span>
-                                {% endif %}
                             </h5>
                         </div>
                         {% if comment.replied %}
-                            <p class="alert alert-dark reply-body" style="margin: 0px;padding: 0px;">
-                                {{ comment.replied.author }}:
-                                <br>{{ comment.replied.body }}
-                            </p>
+                            <div style="border-width: 1px;border-color:#ffed7d;border-style:solid;border-radius: 20px;padding:10px;">
+                                <p class="alert alert-dark reply-body" style="margin: 0px;padding: 0px;">
+                                    <span class="badge badge-light" style="color:#166b41">Reply to</span>
+                                    {{ comment.replied.author }}:
+                                    <br>{{ comment.replied.body }}
+                                </p>
+                            </div>
                         {% endif %}
                         <p class="mb-1" style="margin: 0px;padding: 0px;font-family:KaiTi;">
                             {{ comment.body }}
