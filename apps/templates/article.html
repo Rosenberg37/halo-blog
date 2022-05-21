@@ -4,7 +4,9 @@
 
 {% block pageHeader %}
     <header class="intro-header"
-            style="background-image: url('{{ url_for('static',filename='theme/img/post-bg.jpg' ) }}')">
+{#            style="background-image: url('{{ url_for('static',filename='theme/img/post-bg.jpg' ) }}')">#}
+        style="background-image: url('https://p2.itc.cn/images01/20220515/7f33f563ded5431799285239dbe569cc.jpeg')">
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
@@ -63,7 +65,7 @@
                                 <br>{{ comment.replied.body }}
                             </p>
                         {% endif %}
-                        <p class="mb-1" style="margin: 0px;padding: 0px;">
+                        <p class="mb-1" style="margin: 0px;padding: 0px;font-family:KaiTi;">
                             {{ comment.body }}
                         </p>
                         <a class="btn btn-outline-primary btn-sm"
@@ -73,7 +75,7 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <div class="tip"><h5 style="color:red;">No comments.</h5></div>
+            <div class="tip container" style="width: 60%"><h5 style="color:red;">No comments.</h5></div>
         {% endif %}
     </div>
     {% if request.args.get('reply') %}
@@ -82,14 +84,23 @@
             <a class="float-right" href="{{ url_for('.article', article_id=article.id) }}">Cancel</a>
         </div>
     {% endif %}
-    <div class="container">
-        {% if comments %}
-            {{ render_pagination(pagination, fragment='#comments') }}
-        {% endif %}
+    <div class="container" style="">
+        <div class="row">
+            <div class="col-5">
+            </div>
+            <div class="col-2">
+                {% if comments %}
+                    {{ render_pagination(pagination, fragment='#comments') }}
+                {% endif %}
+            </div>
+            <div class="col-5">
+            </div>
+        </div>
+
     </div>
 
 
-    <div id="comment-form" class="container">
+    <div id="comment-form" class="container" style="width: 60%">
         {{ render_form(form, action=request.full_path) }}
     </div>
 {% endblock %}

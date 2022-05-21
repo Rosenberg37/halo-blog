@@ -6,10 +6,10 @@
             {% for article in articles %}
                 <div class="panel-small single-post box-shadow-wrap-normal" style="background-color:#eaeaea;border-radius: 20px;padding:10px;"> {# post-preview #}
                     <a href="/article/{{ article.id }}">
-                        <h2 class="post-title" style="color:#000000;font-size:25px;font-weight:normal;">
+                        <h2 class="post-title" style="color:#000000;font-size:25px;font-weight:normal;font-family:SimHei;">
                             {{ article.title }}
                         </h2>
-                        <h3 class="post-subtitle" style="color:#7e0404;font-size:20px;font-weight:normal;">
+                        <h3 class="post-subtitle" style="color:#7e0404;font-size:20px;font-weight:normal;font-family:KaiTi;">
                             {{ article.content | safe | truncate(30) }}
                         </h3>
                     </a>
