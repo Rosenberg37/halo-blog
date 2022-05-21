@@ -1,10 +1,10 @@
 from flask import url_for, redirect, request, flash, render_template, Blueprint
 from flask_login import login_user, logout_user, current_user
-
+from flask_bootstrap import Bootstrap
 import utils
 from apps.blog.forms import LoginForm, CommentForm, AdminCommentForm
 from apps.extentions import *
-from apps.models import User, Article, Comment
+from apps.models import User, Article, Comment, Tag
 
 blog = Blueprint('main', __name__)
 
@@ -52,6 +52,17 @@ def login_out():
 @blog.route("/about")
 def about():
     return render_template("about.html")
+
+
+@blog.route("/tags/<int:tag_id>")
+def tags_id(tag_id):
+    tag = Tag.query.get_or_404(tag_id)
+    return render_template("tags.html", articles=articles, category=tag)
+
+
+@blog.route("/tags")
+def tags():
+    return redirect(url_for("main.tags_id", tag_id=1))
 
 
 @blog.route("/article/<int:article_id>", methods=['GET', 'POST'])
