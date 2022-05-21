@@ -5,6 +5,7 @@ import utils
 from apps.blog.forms import LoginForm, CommentForm, AdminCommentForm
 from apps.extentions import *
 from apps.models import User, Article, Comment, Tag
+import sqlalchemy
 
 blog = Blueprint('main', __name__)
 
@@ -57,9 +58,13 @@ def about():
 @blog.route("/tags/<int:tag_id>")
 def tags_id(tag_id):
     tag = Tag.query.get_or_404(tag_id)
-    paginate = Article.query.order_by(Article.create_time.desc()).paginate(0, 3, error_out=False)
+    page = request.args.get("page")
+    if page is None:
+        page = 1
+    page = int(page)
+    paginate = Article.query.with_parent(tag).order_by(sqlalchemy.desc(Article.create_time)).paginate(page, 3, error_out=False)
     articles = paginate.items
-    return render_template("tags.html", article=articles, category=tag, paginate=paginate)
+    return render_template("tags.html", articles=articles, category=tag, paginate=paginate)
 
 
 @blog.route("/tags")
@@ -71,7 +76,7 @@ def tags():
 def article(article_id):
     article = Article.query.get_or_404(article_id)
 
-    pagination = Comment.query.with_parent(article).order_by(Comment.timestamp).paginate(1, 15)
+    pagination = Comment.query.with_parent(article).order_by(sqlalchemy.desc(Comment.timestamp)).paginate(1, 15)
     comments = pagination.items
 
     if current_user.is_authenticated:
@@ -105,3 +110,4 @@ def article(article_id):
 def reply_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
     return redirect(url_for('main.article', article_id=comment.article_id, reply=comment_id, author=comment.author) + '#comment-form')
+

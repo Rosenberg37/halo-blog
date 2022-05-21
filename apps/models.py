@@ -24,7 +24,7 @@ class User(UserMixin, db.Model):
         return user
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '%r' % self.username
 
 
 class Article(db.Model):
@@ -37,7 +37,7 @@ class Article(db.Model):
     comments = db.relationship('Comment', back_populates='article', cascade='all, delete-orphan')
 
     def __repr__(self):
-        return '<User %r>' % self.title
+        return '%r' % self.title
 
 
 class Comment(db.Model):
