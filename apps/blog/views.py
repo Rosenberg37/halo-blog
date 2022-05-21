@@ -78,7 +78,7 @@ def tags():
 def article(article_id):
     article = Article.query.get_or_404(article_id)
 
-    pagination = Comment.query.with_parent(article).order_by(sqlalchemy.desc(Comment.timestamp)).paginate(1, 15)
+    pagination = Comment.query.with_parent(article).order_by(Comment.timestamp).paginate(1, 15)
     comments = pagination.items
 
     if current_user.is_authenticated:
