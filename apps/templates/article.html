@@ -15,7 +15,10 @@
                         </span>
                         <br>
                         <span class="meta">
-                            Tags: <a href="#"> {{ article.tags }}</a>
+                            Tags:
+                            {% for tag in article.tags %}
+                                <a href="{{ url_for('.tags_id', tag_id=tag.id) }}"> {{ tag }} </a>
+                            {% endfor %}
                         </span>
                     </div>
                 </div>
@@ -37,7 +40,7 @@
                 {% for comment in comments %}
                     <li class="list-group-item list-group-item-action flex-column">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">
+                            <h5 class="mb-1" style="margin: 0;border:0;padding:0;">
                                 <a href="{% if comment.site %} {{ comment.site }}{% else %}#{% endif %}"
                                    target="_blank">
                                     {% if comment.from_admin %}
@@ -50,17 +53,17 @@
                                 {% if comment.from_admin %}
                                     <span class="badge badge-primary">Author</span>
                                 {% endif %}
-                                {% if comment.replied %}<span class="badge badge-light">Reply</span>
+                                {% if comment.replied %}<span class="badge badge-light" style="color:red">Reply</span>
                                 {% endif %}
                             </h5>
                         </div>
                         {% if comment.replied %}
-                            <p class="alert alert-dark reply-body">
+                            <p class="alert alert-dark reply-body" style="margin: 0px;padding: 0px;">
                                 {{ comment.replied.author }}:
                                 <br>{{ comment.replied.body }}
                             </p>
                         {% endif %}
-                        <p class="mb-1">
+                        <p class="mb-1" style="margin: 0px;padding: 0px;">
                             {{ comment.body }}
                         </p>
                         <a class="btn btn-light btn-sm"

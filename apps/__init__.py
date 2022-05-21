@@ -2,7 +2,7 @@
 from flask import Flask
 from flask_admin import Admin
 from flask_babelex import Babel
-from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap5
 
 import config
 from apps.blog import blog
@@ -13,6 +13,7 @@ from apps.models import User, Tag, Article, Comment
 
 def create_app():
     app = Flask(__name__)
+
     app.config.from_object(config)
 
     # 注册蓝图
@@ -26,7 +27,7 @@ def create_app():
     babel = Babel(app)
 
     # Bootstrap
-    bootstrap = Bootstrap(app)
+    bootstrap = Bootstrap5(app)
 
     # 注册flask-admin
     admin = Admin(app, name="HaloBlog", template_mode='bootstrap3', base_template='admin/mybase.html')

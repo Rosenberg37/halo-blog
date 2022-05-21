@@ -57,7 +57,9 @@ def about():
 @blog.route("/tags/<int:tag_id>")
 def tags_id(tag_id):
     tag = Tag.query.get_or_404(tag_id)
-    return render_template("tags.html", articles=articles, category=tag)
+    paginate = Article.query.order_by(Article.create_time.desc()).paginate(0, 3, error_out=False)
+    articles = paginate.items
+    return render_template("tags.html", article=articles, category=tag, paginate=paginate)
 
 
 @blog.route("/tags")

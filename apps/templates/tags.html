@@ -19,16 +19,36 @@
 {% endblock %}
 
 {% block body %}
-    <div class="page-header">
-{#        <p class="text-muted">{{ category.posts|length }} posts</p>#}
-    </div>
     <div class="row">
-        <div class="col-sm-8">
-{#            {% include "article.html" %}#}
-{#            <div class="page-footer">{{ render_pagination(pagination) }}</div>#}
+        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+            {% for article in articles %}
+                <div class="post-preview">
+                    <a href="/article/{{ article.id }}">
+                        <h2 class="post-title">
+                            {{ article.title }}
+                        </h2>
+                        <h3 class="post-subtitle">
+                            {{ article.content | safe | truncate(30) }}
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#">ouyangm</a> {{ article.create_time }}</p>
+                </div>
+                <hr>
+            {% endfor %}
+            <!-- Pager -->
+            <div class="clearfix">
+                <input type="hidden" name="page" id="page" value="{{ paginate.page }}"/>
+                <a class="btn btn-secondary float-right" onclick="next_page()">Older Posts</a>
+            </div>
         </div>
-{#        <div class="col-sm-4 sidebar">#}
-{#            {% include "blog/_sidebar.html" %}#}
-{#        </div>#}
     </div>
+{% endblock %}
+
+{% block ext_js %}
+    <script>
+        function next_page() {
+            const page = parseInt($("#page").val());
+            window.location.href = '{{ url_for('main.index')}}' + '?page=' + (page + 1);
+        }
+    </script>
 {% endblock %}
