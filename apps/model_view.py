@@ -104,6 +104,14 @@ class ArticleVModel(BaseMView):
     }
     column_exclude_list = ['content']
 
+    form_extra_fields = {
+        'File': form. FileUploadField(
+            'File',
+            base_path=file_path,
+            relative_path="upload_files/",
+        )
+    }
+
 
 class CommentView(BaseMView):
     column_labels = {

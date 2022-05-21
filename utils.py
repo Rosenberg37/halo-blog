@@ -9,11 +9,6 @@ def md5(text):
     return m2.hexdigest()
 
 
-def verity_password(origin_password, password):
-    new_password = md5(origin_password)
-    return password == new_password
-
-
 def random_key(key_length=16):
     chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
     length = len(chars) - 1

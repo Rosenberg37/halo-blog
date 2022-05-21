@@ -1,11 +1,11 @@
+import sqlalchemy
 from flask import url_for, redirect, request, flash, render_template, Blueprint
 from flask_login import login_user, logout_user, current_user
-from flask_bootstrap import Bootstrap
-import utils
+
 from apps.blog.forms import LoginForm, CommentForm, AdminCommentForm
 from apps.extentions import *
 from apps.models import User, Article, Comment, Tag
-import sqlalchemy
+from utils import md5
 
 blog = Blueprint('main', __name__)
 
@@ -34,8 +34,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None:
-            flag = utils.verity_password(form.password.data, user.password_hash)
-            if flag:
+            if user.password_hash == md5(form.password.data):
                 login_user(user, form.remember_me.data)
                 return redirect(request.args.get('next') or url_for("admin.index"))
         flash('无效的用户名或者密码')
