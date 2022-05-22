@@ -1,10 +1,10 @@
 from utils import random_key
 
-HOST = '114.55.252.134'
+HOST = 'localhost'
 PORT = '3306'
 DATABASE = 'blog1'
 USERNAME = 'root'
-PASSWORD = 'Blog@2022'
+PASSWORD = 'Zwh200012121@'
 SECRET_KEY = random_key()
 
 DB_URI = f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}?charset=utf8"

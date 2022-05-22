@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8ebef964-31d7-405e-8fd6-13748a04dde9" name="halo-server">
+        <fileTransfer accessType="SFTP" host="120.46.133.140" port="22" sshConfigId="81e55f04-a3ee-4cb4-b44b-7ac0265dcdc0" sshConfig="root@120.46.133.140:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
