@@ -4,6 +4,7 @@ from flask_admin import Admin
 from flask_babelex import Babel
 from flask_bootstrap import Bootstrap5
 
+from flask_moment import Moment
 import config
 from apps.blog import blog
 from apps.extentions import db, login_manager
@@ -26,6 +27,7 @@ def create_app():
     # 汉化
     babel = Babel(app)
 
+    moment = Moment(app)
     # Bootstrap
     bootstrap = Bootstrap5(app)
 
