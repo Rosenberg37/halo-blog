@@ -71,3 +71,4 @@ class ArticleTag(db.Model):
     db.__tablename__ = 'article_tag'
     article_id = db.Column(db.Integer, db.ForeignKey(Article.id), primary_key=True)
     tag_id = db.Column(db.Integer, db.ForeignKey(Tag.id), primary_key=True)
+
