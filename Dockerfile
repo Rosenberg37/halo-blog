@@ -15,5 +15,5 @@ COPY . .
 # 将当前文件中的目录复制到/app目录下
 
 
-CMD ["gunicorn", "xiaoblog:app", "-c", "./gunicorn.conf.py"]
+CMD ["gunicorn", "haloblog:app", "-c", "./gunicorn.conf.py"]
 
