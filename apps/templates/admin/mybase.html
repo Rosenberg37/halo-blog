@@ -72,9 +72,9 @@
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     {% if current_user.is_authenticated %}
-                        <li><a href="/loginout.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{{ url_for('main.login_out') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             {% else %}
-                        <li><a href="/login.html"><i class="fa fa-sign-out fa-fw"></i> Logint</a>
+                        <li><a href="{{ url_for('main.login') }}"><i class="fa fa-sign-out fa-fw"></i> Login</a>
                     {% endif %}
                     </li>
                 </ul>
