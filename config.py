@@ -1,6 +1,6 @@
 from utils import random_key
 
-HOST = 'localhost'
+HOST = '127.0.0.1'
 PORT = '3306'
 DATABASE = 'blog1'
 USERNAME = 'root'
