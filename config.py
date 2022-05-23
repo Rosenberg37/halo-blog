@@ -1,6 +1,6 @@
 from apps.utils import random_key
 
-HOST = '127.0.0.1'
+HOST = '120.46.133.140'
 PORT = '3306'
 DATABASE = 'blog1'
 USERNAME = 'root'
