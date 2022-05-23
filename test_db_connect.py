@@ -10,3 +10,4 @@ conn = pymysql.connect(
 )
 
 print(conn)
+conn.close()
