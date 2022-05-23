@@ -4,12 +4,13 @@ import os.path as op
 import markupsafe
 from flask import url_for, redirect, request
 from flask_admin import form
+from flask_admin.contrib.fileadmin import FileAdmin
 from flask_admin.contrib.sqla import ModelView
 from flask_login.utils import current_user
 from sqlalchemy.event import listens_for
 from wtforms import TextAreaField
 from wtforms.widgets import TextArea
-from flask_admin.contrib.fileadmin import FileAdmin
+
 from apps import utils
 from apps.models import User
 
@@ -36,7 +37,7 @@ class BaseMView(ModelView):
 
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access
-        return redirect(url_for('login', next=request.url))
+        return redirect(url_for('main.login', next=request.url))
 
 
 @listens_for(User, 'after_delete')
@@ -107,7 +108,6 @@ class ArticleVModel(BaseMView):
     # def on_model_change(self, form, model, is_created):
 
 
-
 class CommentView(BaseMView):
     column_labels = {
         'id': u'评论ID',
@@ -131,6 +131,3 @@ class FileAdminView(FileAdmin):
     can_delete_dirs = False
     can_mkdir = False
     can_rename = True
-
-
-

@@ -1,6 +1,7 @@
 # coding:utf-8
 import os.path as op
 
+import pymysql as mysql
 from flask import Flask
 from flask_admin import Admin
 from flask_babelex import Babel
@@ -12,10 +13,8 @@ from apps.blog import blog
 from apps.extentions import db, login_manager
 from apps.model_view import UserModelView, BaseMView, ArticleVModel, CommentView, FileAdminView
 from apps.models import User, Tag, Article, Comment
-
-
 from config import *
-import pymysql as mysql
+
 
 def create_app():
     app = Flask(__name__)

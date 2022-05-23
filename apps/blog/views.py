@@ -36,7 +36,7 @@ def login():
         if user is not None:
             if user.password_hash == md5(form.password.data):
                 login_user(user, form.remember_me.data)
-                return redirect(request.args.get('next') or url_for("admin.index"))
+                return redirect(request.args.get('next') or url_for("main.index"))
         flash('无效的用户名或者密码')
 
     return render_template("login.html", form=form)
@@ -86,7 +86,7 @@ def article(article_id):
         form = AdminCommentForm()
         form.author.data = current_user.username
         form.email.data = current_user.email
-        form.site.data = url_for('.index')
+        form.site.data = url_for('main.index')
     else:
         form = CommentForm()
 
