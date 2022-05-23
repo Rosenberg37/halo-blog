@@ -5,7 +5,7 @@ from flask_login import login_user, logout_user, current_user
 from apps.blog.forms import LoginForm, CommentForm, AdminCommentForm
 from apps.extentions import *
 from apps.models import User, Article, Comment, Tag
-from utils import md5
+from apps.utils import md5
 
 blog = Blueprint('main', __name__)
 

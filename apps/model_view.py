@@ -10,7 +10,7 @@ from sqlalchemy.event import listens_for
 from wtforms import TextAreaField
 from wtforms.widgets import TextArea
 from flask_admin.contrib.fileadmin import FileAdmin
-import utils
+from apps import utils
 from apps.models import User
 
 file_path = op.join(op.dirname(__file__), 'static')  # 文件上传路径
