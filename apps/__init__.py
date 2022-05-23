@@ -50,8 +50,10 @@ def create_app():
 
     con = mysql.connect(host=HOST, port=3306, user=USERNAME, passwd=PASSWORD, db=DATABASE, charset="utf8mb4")
     mycursor = con.cursor()
-    sql = "insert into user (username, email, password_hash) values ('admin', 'null', '21232f297a57a5a743894a0e4a801fc3')"
-    mycursor.execute(sql)
-    con.commit()
+    if mycursor.execute("select * from user") == 0:
+        sql = "insert into user (username, email, password_hash) values ('admin', 'null', '21232f297a57a5a743894a0e4a801fc3')"
+        mycursor.execute(sql)
+        con.commit()
+    con.close()
 
     return app
