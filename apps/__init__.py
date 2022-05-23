@@ -14,6 +14,9 @@ from apps.model_view import UserModelView, BaseMView, ArticleVModel, CommentView
 from apps.models import User, Tag, Article, Comment
 
 
+from config import *
+import pymysql as mysql
+
 def create_app():
     app = Flask(__name__)
 
@@ -44,5 +47,15 @@ def create_app():
     admin.add_view(FileAdminView(path, '/static/uploadfile', name='Static Files'))
     # 整合flask-login
     login_manager.init_app(app)
+
+    #   add an admin user
+
+    con = mysql.connect(host=HOST, port=3306, user=USERNAME, passwd=PASSWORD, db=DATABASE, charset="utf8mb4")
+    mycursor = con.cursor()
+    if mycursor.execute("select * from user") == 0:
+        sql = "insert into user (username, email, password_hash) values ('admin', 'null', '21232f297a57a5a743894a0e4a801fc3')"
+        mycursor.execute(sql)
+        con.commit()
+    con.close()
 
     return app
